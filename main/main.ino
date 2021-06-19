@@ -1,5 +1,5 @@
 #include <LiquidCrystal.h>
-#include <ec_sensor.ino>
+#include "ec_sensor.ino"
 
 const double REG_EC_INTERVAL = 60*60*1000; // Regular interval for EC loop is 1 hour
 const double REG_PH_INTERVAL = 60*10*1000; // Regular pH loop will occur 10 minutes after EC loop

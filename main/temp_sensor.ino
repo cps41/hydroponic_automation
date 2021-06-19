@@ -1,11 +1,11 @@
 #include <DS18B20.h>
-#include <OneWireHub.h>
-
-//Temperature chip i/o
-OneWire ds(DS18S20_Pin);  // on digital pin 2
+#include <OneWire.h>
 
 const int TEMP_READ_PIN = A1;
 const int TEMP_POWER_PIN = 8;
+
+//Temperature chip i/o
+OneWire ds(TEMP_READ_PIN);
 
 float getTemp() {
     float temp = 0;
@@ -28,10 +28,10 @@ float getTemp(){
       return -1000;
   }
 
-  // if ( OneWire::crc8( addr, 7) != addr[7]) {
-  //     Serial.println("CRC is not valid!");
-  //     return -1000;
-  // }
+  if ( OneWire::crc8( addr, 7) != addr[7]) {
+      Serial.println("CRC is not valid!");
+      return -1000;
+  }
 
   if ( addr[0] != 0x10 && addr[0] != 0x28) {
       Serial.print("Device is not recognized");

@@ -2,8 +2,8 @@
 EC Sensor Automation
 Author: Carly Sills
 */
-#include <temp_sensor.ino>
-#include <ina260_sensor.ino>
+#include "temp_sensor.ino"
+#include "ina260_sensor.ino"
 
 const int INPUT_PIN = 6;
 const float A = 10; // area of electrodes
