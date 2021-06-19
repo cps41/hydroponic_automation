@@ -1,4 +1,4 @@
-#include <ec_sensor.ino>
+#include "ec_sensor.ino"
 #include "ph_sensor.ino"
 
 const int NUTRIENT_PUMP_PIN = 9;
