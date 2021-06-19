@@ -52,6 +52,7 @@ void SensorAutomation::regulateEC() {
 
     if(EC < REG_EC) {
         digitalWrite(_nutrient_pump, HIGH);
+        delay(5000);
         regulateEC();
     }
     else digitalWrite(_nutrient_pump, LOW);
@@ -62,13 +63,32 @@ void SensorAutomation::checkPH() {
     PHSensor ph_sensor(_ph_read, _ph_power);
     PH = ph_sensor.getPH();
 
-    if(PH < MIN_PH || PH > MAX_PH) regulatePH();
+    if(PH < MIN_PH) upPH();
+    else if(PH>MAX_PH) downPH();
 }
 
-void SensorAutomation::regulatePH() {
+void SensorAutomation::upPH() {
     float PH;
     PHSensor ph_sensor(_ph_read, _ph_power);
     PH = ph_sensor.getPH();
 
-    if(PH < MIN_PH || PH > MAX_PH) regulatePH();
+    if(PH < REG_PH) {
+        digitalWrite(_up_pump, HIGH);
+        delay(5000);
+        upPH();
+    }
+    else digitalWrite(_up_pump, LOW);
+}
+
+void SensorAutomation::downPH() {
+    float PH;
+    PHSensor ph_sensor(_ph_read, _ph_power);
+    PH = ph_sensor.getPH();
+
+    if(PH > REG_PH) {
+        digitalWrite(_down_pump, HIGH);
+        delay(5000);
+        upPH();
+    }
+    else digitalWrite(_down_pump, LOW);
 }

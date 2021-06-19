@@ -30,7 +30,8 @@ class SensorAutomation {
         int _down_pump;
         int _nutrient_pump;
         void regulateEC();
-        void regulatePH();
+        void upPH();
+        void downPH();
 };
 
 #endif
