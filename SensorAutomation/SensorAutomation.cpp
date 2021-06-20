@@ -1,6 +1,9 @@
 #include "SensorAutomation.h"
 #include <Arduino.h>
-#include "ec_sensor.ino"
+#include <ECSensor.h>
+#include <PHSensor.h>
+#include <INA260Sensor.h>
+#include <TempSensor.h>
 
 const float MIN_EC = 1.2;
 const float REG_EC = 1.8;

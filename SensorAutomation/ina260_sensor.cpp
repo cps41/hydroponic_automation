@@ -1,4 +1,4 @@
-#include "SensorAutomation.h"
+#include <INA260Sensor.h>
 #include <Adafruit_INA260.h>
 
 Adafruit_INA260 ina260 = Adafruit_INA260();

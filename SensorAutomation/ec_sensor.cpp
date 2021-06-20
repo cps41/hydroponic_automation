@@ -2,7 +2,9 @@
 EC Sensor Automation
 Author: Carly Sills
 */
-#include "SensorAutomation.h"
+#include <ECSensor.h>
+#include <TempSensor.h>
+#include <INA260Sensor.h>
 #include <Arduino.h>
 
 const float A = 10; // area of electrodes

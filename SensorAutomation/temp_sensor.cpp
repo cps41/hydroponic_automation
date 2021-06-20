@@ -1,4 +1,4 @@
-#include "SensorAutomation.h"
+#include <TempSensor.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
