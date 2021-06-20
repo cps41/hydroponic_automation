@@ -1,3 +1,5 @@
+#include "SensorAutomation.h"
+
 unsigned long int average;
 
 const int PH_POWER_PIN = 9;
@@ -5,7 +7,12 @@ const int PH_READ_PIN = A2;
 const int PH_READ_DELAY = 1000;
 const float OFFSET = 0.0; // TBD
 
-void getPH() {
+PHSensor::PHSensor(int ph_read, int ph_power) {
+  _ph_read = ph_read;
+  _ph_power = ph_power;
+}
+
+float PHSensor::getPH() {
   float avg_ph_voltage;
   float ph;
 
@@ -24,4 +31,6 @@ void getPH() {
 
   Serial.print("pH: ");
   Serial.println(ph);
+
+  return ph;
 }

@@ -8,7 +8,7 @@ Author: Carly Sills
 const float A = 10; // area of electrodes
 const float L = 1; // distance between electrodes
 const float TEMP_REG = 25.0; // ec is regulated based on temp of 25 deg celcius
-const float EC_CALIB; // TBD
+const float EC_CALIB = 1; // TBD
 const int READ_DELAY = 5000;
 const float TEMP_CO = 0.019;
 
@@ -19,7 +19,9 @@ float I; // current
 float K = L/A; // cell constant
 float k; // actual conductance
 
-float * avgResistance(TempSensor temp_sensor, INA260Sensor ina260_sensor) {
+float info[] = {0, 0, 0};
+
+void * avgResistance(TempSensor temp_sensor, INA260Sensor ina260_sensor) {
     float temp_start, temp_end;
     float avg_v = 0;
     float avg_i = 0;
@@ -46,8 +48,9 @@ float * avgResistance(TempSensor temp_sensor, INA260Sensor ina260_sensor) {
     temp = (temp_start+temp_end)/2;
 
     R = U/I; // R = U/I (ohms law)
-    float info[] = {R, temp_start, temp_end};
-    return info;
+    info[0] = R;
+    info[1] = temp_start;
+    info[2] = temp_end;
 }
 
 ECSensor::ECSensor(int ec_read, int ec_power,
@@ -108,12 +111,12 @@ void ECSensor::ecCalibrate () {
 
     Serial.println("Calibration routine started");
     digitalWrite(_ec_power, HIGH); // power sensor
-    float * averages = avgResistance(temp_sensor, ina260_sensor);
+    avgResistance(temp_sensor, ina260_sensor);
     digitalWrite(_ec_power, LOW); // shutdown sensor
 
-    R = *(averages); // averages[0] = average resistance
-    temp_start = *(averages+1); // averages[1] = initial temp
-    temp_end = *(averages+2); // averages[2] = final temp
+    R = info[0]; // averages[0] = average resistance
+    temp_start = info[1]; // averages[1] = initial temp
+    temp_end = info[2]; // averages[2] = final temp
     temp_dif = temp_end - temp_start;
 
     EC = EC_CALIB / (1+TEMP_CO*(temp_end-TEMP_REG)); // Calibrated EC = EC_25/(1 + α(t-25))

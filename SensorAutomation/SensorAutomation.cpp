@@ -28,8 +28,8 @@ SensorAutomation::SensorAutomation(int ec_read, int ec_power,
     int input_pins[] = {_ec_read, _ph_read, _temp_read, _ina_read};
     int output_pins[] = {_ec_power, _ph_power, _temp_power, _ina_power, _up_pump, _down_pump, _nutrient_pump};
 
-    for(int i=0; i<sizeof(input_pins); i++) pinMode(input_pins[i], INPUT);
-    for(int j=0; j<sizeof(output_pins); j++) pinMode(input_pins[j], OUTPUT);
+    // for(int i=0; i<sizeof(input_pins); i++) pinMode(input_pins[i], INPUT);
+    // for(int j=0; j<sizeof(output_pins); j++) pinMode(input_pins[j], OUTPUT);
 }
 
 void SensorAutomation::calibrateEC() {
