@@ -8,7 +8,7 @@ int ec_read = A0;
 int ec_power = 4;
 int ph_read = A1;
 int ph_power = 5;
-int temp_read = A2;
+int temp_read = 2;
 int temp_power = 6; 
 int ina_read = A3;
 int ina_power = 7;
@@ -25,12 +25,12 @@ SensorAutomation automate(ec_read, ec_power,
 void setup() {
     Serial.begin(9600);
     Serial.println("Ready");
-    automate.calibrateEC(); // calibrate EC sensor
+    // automate.calibrateEC(); // calibrate EC sensor
 }
 
 void loop() {
     automate.checkEC(); // enter EC loop to maintain levels
     delay(REG_PH_INTERVAL); // delay before pH check
-    automate.checkPH(); // enter pH loop to maintain levels
-    delay(REG_EC_INTERVAL); // delay before next iteration
+//    automate.checkPH(); // enter pH loop to maintain levels
+//    delay(REG_EC_INTERVAL); // delay before next iteration
 }

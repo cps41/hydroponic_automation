@@ -13,8 +13,12 @@ float TempSensor::getTemp(){
   OneWire ds(_temp_read);
   DallasTemperature sensor(&ds);
   float temp;
+  Serial.println("Getting temp...");
   sensor.requestTemperatures();
   temp = sensor.getTempCByIndex(0);
+  Serial.print("Temp: ");
+  Serial.print(temp);
+  Serial.print(" *C\n");
   
   return temp;
 }

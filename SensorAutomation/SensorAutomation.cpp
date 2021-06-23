@@ -42,6 +42,7 @@ void SensorAutomation::calibrateEC() {
 
 void SensorAutomation::checkEC() {
     float EC;
+    Serial.print("Getting EC...\n");
     ECSensor ec_sensor(_ec_read, _ec_power, _temp_read, _temp_power, _ina_read, _ina_power);
     EC = ec_sensor.getEC();
 

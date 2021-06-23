@@ -7,10 +7,10 @@ Author: Carly Sills
 #include <INA260Sensor.h>
 #include <Arduino.h>
 
-const float A = 10; // area of electrodes
-const float L = 1; // distance between electrodes
+const float A = 0.20; // area of electrodes
+const float L = 0.75; // distance between electrodes
 const float TEMP_REG = 25.0; // ec is regulated based on temp of 25 deg celcius
-const float EC_CALIB = 1; // TBD
+const float EC_CALIB = 2000; // TBD
 const int READ_DELAY = 5000;
 const float TEMP_CO = 0.019;
 
@@ -123,6 +123,10 @@ void ECSensor::ecCalibrate () {
 
     EC = EC_CALIB / (1+TEMP_CO*(temp_end-TEMP_REG)); // Calibrated EC = EC_25/(1 + α(t-25))
     K_cal= 1000/(R*EC);
+
+    Serial.print("EC: ");
+    Serial.print(EC);
+    Serial.print("\n");
 
     Serial.print("Cell constant was ");
     Serial.print(K);
