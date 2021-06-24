@@ -9,16 +9,14 @@
 
 class SensorAutomation {
     public:
-        SensorAutomation(int ec_read, int ec_power, 
+        SensorAutomation(int ec_power, 
                          int ph_read, int ph_power, 
-                         int temp_read, int temp_power, 
-                         int ina_read, int ina_power,
+                         int temp_read, int temp_power,
                          int up_pump, int down_pump, int nutrient_pump);
         void calibrateEC();
         void checkEC();
         void checkPH();
     private:
-        int _ec_read;
         int _ec_power;
         int _ph_read;
         int _ph_power;
