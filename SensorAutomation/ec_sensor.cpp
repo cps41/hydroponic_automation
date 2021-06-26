@@ -2,9 +2,9 @@
 EC Sensor Automation
 Author: Carly Sills
 */
-#include <ECSensor.h>
-#include <TempSensor.h>
-#include <INA260Sensor.h>
+#include "ECSensor.h"
+#include "TempSensor.h"
+#include "INA260Sensor.h"
 #include <Arduino.h>
 
 const float A = 0.20; // area of electrodes
@@ -67,8 +67,6 @@ void ECSensor::ecCalibrate () {
     float EC;
     float K_cal;
     TempSensor temp_sensor(_temp_read, _temp_power);
-    INA260Sensor ina_current(0x40);
-    INA260Sensor ina_voltage(0x44);
 
     Serial.println("Calibration routine started");
     digitalWrite(_ec_power, HIGH); // power sensor
