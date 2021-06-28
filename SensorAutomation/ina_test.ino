@@ -1,4 +1,4 @@
-#include <INA260Sensor.h>
+#include "INA260Sensor.h"
 
 INA260Sensor ina_current;
 INA260Sensor ina_voltage;

@@ -1,6 +1,6 @@
-#include <ECSensor.h>
+#include "ECSensor.h"
 
-ECSensor ec_sense(2, A0, 3);
+ECSensor ec_sense(1, 2, 3);
 
 void setup() {
     Serial.begin(9600);

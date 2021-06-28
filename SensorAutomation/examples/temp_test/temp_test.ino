@@ -1,4 +1,4 @@
-#include <TempSensor.h>
+#include "TempSensor.h"
 
 TempSensor temp_sense(2, 6);
 void setup() {
