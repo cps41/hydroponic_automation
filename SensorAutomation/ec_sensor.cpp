@@ -7,8 +7,8 @@ Author: Carly Sills
 #include "INA260Sensor.h"
 #include <Arduino.h>
 
-const float A = 0.20; // area of electrodes
-const float L = 0.75; // distance between electrodes
+const float A = 0.42; // area of electrodes
+const float L = 0.05; // distance between electrodes
 const float TEMP_REG = 25.0; // ec is regulated based on temp of 25 deg celcius
 const float EC_CALIB = 2000; // TBD
 const int READ_DELAY = 5000;
@@ -18,7 +18,7 @@ float G; // conductance
 float R; // resistance
 float U; // potential
 float I; // current
-float K = L/A; // cell constant
+float K = A/L; // cell constant
 float k; // actual conductance
 
 ECSensor::ECSensor(int ec_power, int temp_read, int temp_power) {
@@ -27,7 +27,7 @@ ECSensor::ECSensor(int ec_power, int temp_read, int temp_power) {
     _temp_read = temp_read;
     _temp_power = temp_power;
     ina_current = INA260Sensor(0x40);
-    ina_voltage = INA260Sensor(0x44);
+//    ina_voltage = INA260Sensor(0x44);
 }
 
 /*
@@ -41,11 +41,13 @@ float ECSensor::getEC() {
     float EC_uncalibrated;
     TempSensor temp_sensor(_temp_read, _temp_power);
 
+    Serial.println("Calculating EC........");
+
     digitalWrite(_ec_power, HIGH); // power sensor
-    U += ina_voltage.getVoltage();
+    U += ina_current.getVoltage();
     I += ina_current.getCurrent();
     temp = temp_sensor.getTemp();
-    R = U/I;
+    R = (5000-U)/I;
     digitalWrite(_ec_power, LOW); // shutdown sensor
 
     EC_uncalibrated = 1000/(R*K); // EC = 1000/(resistance*cell constant)
@@ -54,9 +56,6 @@ float ECSensor::getEC() {
     Serial.print(" EC: ");
     Serial.print(EC);
     Serial.println(" microSiemens/cm");
-    Serial.print("Temp: ");
-    Serial.print(temp);
-    Serial.println(" *C");
 }
 
 /*
