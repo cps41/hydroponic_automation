@@ -68,11 +68,11 @@ float PHSensor::getPH() {
     }
 
     ph_index = 0;
-    voltage = ph_averagearray(PH_Buf, ArrayLength)*5.0/1024/6; // convert median of samples to mV
+    voltage = ph_averagearray(PH_Buf, ArrayLength)*5.0/1024;
     PH = (3.5 * voltage) + OffsetPH; // convert to pH
     Serial.print("Voltage:");
     Serial.print(voltage,3);
-    Serial.print("mV    pH value: ");
+    Serial.print("V    pH value: ");
     Serial.println(PH,3);
     return PH;
 }
