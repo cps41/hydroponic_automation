@@ -14,6 +14,12 @@ float TempSensor::getTemp(){
   float temp;
   sensor.requestTemperatures();
   temp = sensor.getTempCByIndex(0);
+  while(temp == -127.00){
+    Serial.println("Temp Sensor Busy...Trying again");
+    delay(200);
+    sensor.requestTemperatures();
+    temp = sensor.getTempCByIndex(0);
+  }
   Serial.print("Temp: ");
   Serial.print(temp);
   Serial.println("*C");

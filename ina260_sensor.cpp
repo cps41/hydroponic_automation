@@ -2,7 +2,7 @@
 #include <Adafruit_INA260.h>
 
 
-INA260Sensor::INA260Sensor(uint8_t addr=INA260_I2CADDR_DEFAULT) {
+INA260Sensor::INA260Sensor(uint8_t addr) {
     ina260 = Adafruit_INA260();
     // if (!ina260.begin(addr)) {
     //     Serial.print("Couldn't find INA260 chip with address: ");

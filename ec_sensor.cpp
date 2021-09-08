@@ -8,7 +8,7 @@ Author: Carly Sills
 #include <Arduino.h>
 
 const float TEMP_REG = 25.0; // ec is regulated based on temp of 25 deg celcius
-const float EC_CALIB = 2000; // ec level of calibration solution
+const float EC_CALIB = 1500; // ec level of calibration solution
 const float TEMP_CO = 0.019;
 
 static float Offset = 0.00 ;

@@ -59,17 +59,30 @@ float PHSensor::getPH() {
     int ph_index=0;
     float PH, voltage;
 
-    // Take samples of pH output
-    while(ph_index<ArrayLength) {
-        int cur = analogRead(_ph_read);
-        Serial.println(cur);
-        PH_Buf[ph_index++] = cur;
-        delay(40);
+//    // Take samples of pH output
+//    while(ph_index<ArrayLength) {
+//        int cur = analogRead(_ph_read);
+////        Serial.println(cur);
+//        PH_Buf[ph_index++] = cur;
+//        delay(40);
+//    }
+//
+//    voltage = ph_averagearray(PH_Buf, ArrayLength)*5.0/1024;
+//    PH = (3.5 * voltage) + OffsetPH; // convert to pH
+    // Fake PH values for the sake of testing / no actual pH meter
+    voltage = analogRead(_ph_read)*5.0/1024;
+    if(voltage > 4.0) 
+    {
+      PH = 14.0;
+    } 
+    else if (voltage < 2.0)
+    {
+      PH = 7.0;
     }
-
-    ph_index = 0;
-    voltage = ph_averagearray(PH_Buf, ArrayLength)*5.0/1024;
-    PH = (3.5 * voltage) + OffsetPH; // convert to pH
+    else 
+    {
+      PH = 0;
+    }
     Serial.print("Voltage:");
     Serial.print(voltage,3);
     Serial.print("V    pH value: ");
